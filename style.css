@@ -1,0 +1,139 @@
+/* General body styles */
+body {
+    background-color: #121212;
+    color: #e0e0e0;
+    margin: 0;
+    padding: 0;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Image styles */
+img {
+    max-width: 650px; /* Limit image width to maintain uniformity */
+    height: auto; /* Maintain aspect ratio */
+    display: block; /* Center images horizontally */
+    margin: 20px auto; /* Add consistent top and bottom spacing */
+}
+
+/* Sidebar styles */
+.sidebar {
+    background-color: #1f1f1f;
+    height: 100vh;
+    padding-top: 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px;
+    transition: background-color 0.3s ease;
+}
+
+.sidebar a {
+    color: #e0e0e0;
+    text-decoration: none;
+    padding: 10px;
+    display: block;
+    transition: color 0.3s ease;
+}
+
+.sidebar a:hover {
+    background-color: #343a40;
+}
+
+/* Content styles */
+.content {
+    margin-left: 250px;
+    padding: 20px;
+    transition: margin-left 0.3s ease;
+}
+
+/* Dark mode styles */
+.dark-mode {
+    background-color: #121212;
+    color: #e0e0e0;
+}
+
+/* Light mode styles */
+.light-mode {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+.light-mode .sidebar {
+    background-color: #f8f9fa;
+}
+
+.light-mode .sidebar a {
+    color: #000000;
+}
+
+.light-mode .sidebar a:hover {
+    background-color: #e9ecef;
+}
+
+.light-mode img {
+    border: 1px solid #888888;
+}
+
+.light-mode h2 {
+    color: #000000 !important;
+}
+
+/* Page image styles */
+.page img {
+    height: auto; /* Maintain aspect ratio */
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+/* Page animation */
+.page {
+    animation: fadeIn 0.5s;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Toggle button container */
+.toggle-container {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 1000;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 200px;
+    }
+
+    .content {
+        margin-left: 200px;
+    }
+
+    img {
+        max-width: 400px; /* Adjust image size for smaller screens */
+    }
+}
+
+@media (max-width: 576px) {
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+    }
+
+    .content {
+        margin-left: 0;
+    }
+
+    img {
+        max-width: 100%; /* Images scale to full width on small screens */
+    }
+}

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leveraging AI for Real-Time Intrusion Detection in IoT-Enabled Healthcare Systems</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body class="dark-mode">
+    <div class="toggle-container">
+        <button class="btn btn-outline-light" id="toggleMode">Toggle Light Mode</button>
+    </div>
+
+    <div class="sidebar">
+        <h2 style="color: #e0e0e0; padding-left: 10px;">Graphs</h2>
+        <nav class="nav flex-column">
+            <a href="#class-distribution" class="nav-link" onclick="showPage('class-distribution')">Class Distribution</a>
+            <a href="#feature-distributions" class="nav-link" onclick="showPage('feature-distributions')">Feature Distribution</a>
+            <a href="#feature-correlations" class="nav-link" onclick="showPage('feature-correlations')">Feature Correlations</a>
+            <a href="#federated-training-accuracy" class="nav-link" onclick="showPage('federated-training-accuracy')">Federated Training Accuracy</a>
+            <a href="#federated-training-loss" class="nav-link" onclick="showPage('federated-training-loss')">Federated Training Loss</a>
+        </nav>
+    </div>
+
+    <div class="content">
+        <div id="class-distribution" class="page">
+            <h1>Class Distribution</h1>
+            <img src="assets/Class Distribution.png" alt="Class Distribution Graph">
+            <p>
+                This chart visualizes the distribution of benign (Class 0) and attack (Class 1) samples in the dataset.
+                <br><br>
+                <strong>Key Observations:</strong>
+                <ul>
+                    <li>Class <strong>0</strong> (Non-Attack): Represents normal operations, and has a higher count.</li>
+                    <li>Class <strong>1</strong> (Attack): Represents intrusion or malicious activities, and has a lower count.</li>
+                </ul>
+                The imbalance indicates that there are significantly more benign samples than attack samples, reflecting real-world IoMT network traffic.
+            </p>
+            <p>
+                <strong>Implications:</strong>
+                <br>
+                The imbalance could lead to bias in the model. Strategies like class-weighted loss, oversampling, or undersampling will help in improving the detection of minority class attacks (Class 1).
+            </p>
+        </div>
+        
+        <div id="feature-distributions" class="page" style="display: none;">
+            <h1>Feature Distributions</h1>
+            <img src="assets/Feature Distributions.png" alt="Feature Distributions Graph">
+            <p>
+                This visualization displays the distributions of various numerical features in the dataset.
+                <br><br>
+                <strong>Key Observations:</strong>
+                <ul>
+                    <li>Skewed features like <strong>frame.time_delta</strong> and <strong>tcp.time_delta</strong> suggest rare or specific patterns in network traffic.</li>
+                    <li>Multimodal distributions in <strong>tcp.srcport</strong> and <strong>tcp.dstport</strong> might reflect different types of network activities.</li>
+                    <li>Minimal variation in <strong>ip.proto</strong> indicates the dominance of a single protocol (likely TCP).</li>
+                </ul>
+                These distributions highlight the importance of preprocessing steps like normalization to ensure balanced feature scaling during model training.
+            </p>
+            <p>
+                <strong>Relevance:</strong>
+                <br>
+                This analysis supports the <strong>feature extraction</strong> and preprocessing methodology described in FYP proposal. Properly scaled and processed features will improve the performance of intrusion detection models, especially CNN-BiLSTM and GRU architectures.
+            </p>
+        </div>
+        
+        <div id="feature-correlations" class="page" style="display: none;">
+            <h1>Feature Correlations</h1>
+            <img src="assets/Feature Correlations.png" alt="Feature Correlations Heatmap">
+            <p>
+                This heatmap illustrates the relationships between numerical features in the dataset.
+                <br><br>
+                <strong>Key Observations:</strong>
+                <ul>
+                    <li><strong>Strong Negative Correlation:</strong> 
+                        <code>tcp.srcport</code> and <code>tcp.dstport</code> (<strong>-0.92</strong>) indicate an inverse relationship between source and destination ports.</li>
+                    <li><strong>Strong Positive Correlation:</strong> 
+                        <code>ip.ttl</code> and <code>tcp.dstport</code> (<strong>0.79</strong>) suggest related behavior between packet time-to-live and destination ports.</li>
+                    <li><strong>Weak or No Correlation:</strong> Features like <code>frame.time_delta</code> and <code>tcp.len</code> are mostly independent.</li>
+                </ul>
+                These correlations guide feature selection and preprocessing, ensuring the dataset is optimized for training.
+            </p>
+            <p>
+                <strong>Relevance:</strong>
+                <br>
+                The heatmap supports the <strong>feature extraction</strong> phase outlined in FYP proposal. Highly correlated features may be removed or transformed, simplifying the intrusion detection models.
+            </p>
+        </div>
+
+        
+        <div id="federated-training-accuracy" class="page" style="display: none;">
+            <h1>Federated Training Accuracy</h1>
+            <img src="assets/Federated Training Accuracy.png" alt="Federated Training Accuracy Plot">
+            <p>
+                This plot shows the improvement in training accuracy over 10 rounds of federated learning.
+                <br><br>
+                <strong>Key Observations:</strong>
+                <ul>
+                    <li>The accuracy rapidly increases during the initial rounds, indicating effective learning from distributed data.</li>
+                    <li>Stabilization above <strong>0.998</strong> suggests the model has converged.</li>
+                </ul>
+            </p>
+            <p>
+                <strong>Relevance:</strong>
+                <br>
+                The results validate the federated learning approach, as highlighted in the FYP proposal. It ensures efficient model training without centralizing sensitive IoMT data.
+            </p>
+        </div>
+        
+        <div id="federated-training-loss" class="page" style="display: none;">
+            <h1>Federated Training Loss</h1>
+            <img src="assets/Federated Training Loss.png" alt="Federated Training Loss Plot">
+            <p>
+                This plot tracks the training loss over 10 rounds of federated learning.
+                <br><br>
+                <strong>Key Observations:</strong>
+                <ul>
+                    <li>The loss starts high (~0.04) and rapidly decreases, showing effective learning.</li>
+                    <li>A small spike at round 8 reflects the dynamic nature of federated learning updates.</li>
+                    <li>The overall trend demonstrates the model's ability to minimize loss and adapt to distributed IoMT data.</li>
+                </ul>
+            </p>
+            <p>
+                <strong>Relevance:</strong>
+                <br>
+                This trend supports the federated learning approach outlined in FYP proposal. The decrease in loss over rounds highlights the model's effective optimization and adaptability.
+            </p>
+        </div>        
+        
+    </div>
+</body>
+</html>
